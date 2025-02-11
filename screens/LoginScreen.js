@@ -1,6 +1,6 @@
 import "../global.css";
 
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
@@ -30,6 +30,7 @@ export default function LoginScreen() {
             
         {/* form */}
         <View className="flex items-center mx-4 gap-5">
+          
           <Animated.View
             entering={FadeInUp.duration(1000).springify()}
             className="bg-black/5 p-5 rounded-2xl w-full">
@@ -39,13 +40,13 @@ export default function LoginScreen() {
           <Animated.View
             entering={FadeInUp.delay(200).duration(1000).springify()}
             className="bg-black/5 p-5 rounded-2xl w-full mb-3">
-            <TextInput placeholder="Password" placeholderTextColor={"gray"} />
+            <TextInput placeholder="Password" placeholderTextColor={"gray"} secureTextEntry={true} />
           </Animated.View>
 
           <Animated.View
             entering={FadeInUp.delay(400).duration(1000).springify()}
             className="w-full">
-            <TouchableOpacity className="w-full bg-color-ruk p-3 rounded-2xl mb-3">
+            <TouchableOpacity className="w-full bg-color-ruk p-3 rounded-2xl mb-3" onPress={()=> navigation.push("ListUser")}>
               <Text className="text-xl font-bold text-white text-center">
                 Login
               </Text>
