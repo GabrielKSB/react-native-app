@@ -1,16 +1,21 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { User } from "../data/userList";
+import { UserData } from "../data/userList";
 
-
-export function UserItem({ name, description }: User) {
+export function UserItem({ id, email, area_code, number, createdAt, updatedAt }: UserData) {
   return (
     <>
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>{name}</Text>
-        <Text numberOfLines={5} style={styles.description}>
-          {description}
+        <Text style={styles.email}>{id} - {email}</Text>
+        <Text numberOfLines={5} style={styles.telephone}>
+          Telephone: {area_code} {number} 
+        </Text>
+        <Text numberOfLines={5} style={styles.telephone}>
+          Created At: {createdAt} 
+        </Text>
+        <Text numberOfLines={5} style={styles.telephone}>
+          Updated At: {updatedAt} 
         </Text>
       </View>
     </View>
@@ -24,23 +29,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 20,
+    paddingHorizontal:5,
+    paddingVertical: 15,
   },
 
   content: {
     flex: 1,
     marginLeft: 16,
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 20,
+    borderColor: "#754183",
+    borderWidth: 1,
   },
 
-  title: {
+  email: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#6F4E37",
-    marginBottom: 16,
+    color: "#754183",
+    marginBottom: 5,
   },
-  description: {
+  telephone: {
     fontSize: 16,
     color: "#000",
+    marginTop: 10
   },
 });
