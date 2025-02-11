@@ -1,5 +1,6 @@
+import "../global.css"
+
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
-import { bgImage } from "../assets/images/backgroundWave.png";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
