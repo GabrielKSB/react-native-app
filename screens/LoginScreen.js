@@ -8,12 +8,14 @@ import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useAuth} from "../hooks/userAuth"
 
 export default function LoginScreen() {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const {singin} = useAuth();
 
   async function loginUsers() {
 
@@ -23,20 +25,7 @@ export default function LoginScreen() {
        setPassword("")
     } 
 
-    try {
-      const takeToken = await api.post("/users/login",{
-        email: email,
-        password: password,
-      }).then((result) => {
-        if(result.status == 200){
-          console.log(result.data)
-        }
-      });
-
-      navigation.push("ListUser");
-    } catch (err) {
-      Alert.alert("Email ou Senha Inválidas")
-    }
+      singin({email,password})
   }
 
   return (

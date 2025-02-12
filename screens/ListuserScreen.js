@@ -5,16 +5,20 @@ import {
   Text,
   TouchableOpacity
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import { UserItem } from "../components/UserListItem";
+import {useAuth} from "../hooks/userAuth"
+import api from "../src/services/api"
 
 
 export default function ListuserScreen() {
   const navigation = useNavigation();
 
+
+  const {singout} = useAuth();
 
   const [users, setUsers] = useState([]); 
 
@@ -24,33 +28,18 @@ export default function ListuserScreen() {
       const usersFromApi = await api.get("users/listUsers");
     
       setUsers(usersFromApi.data);
-
     } catch(err){
       console.log(err)
     }
     
   }
 
+  useEffect(() => {
+    listUsers();
+  }, []);
+
   console.log("Lista de Usuarios: ",users)
 
-  const dataUserList = [
-    {
-      id: 1,
-      email: "gabrielTeste@email.com",
-      area_code: 11,
-      number: 972713344,
-      createdAt: "02-02-2025",
-      updatedAt: "02-02-2025",
-    },
-    {
-      id: 2,
-      email: "adrianoTeste@email.com",
-      area_code: 11,
-      number: 972713344,
-      createdAt: "02-02-2025",
-      updatedAt: "02-02-2025",
-    },
-  ];
 
   function renderItem({ item }) {
     return <UserItem {...item} />;
@@ -74,7 +63,7 @@ export default function ListuserScreen() {
         className="font-bold text-2xl uppercase pt-3 text-color-ruk">
           Registered Users
         </Animated.Text>
-        <TouchableOpacity onPress={() => navigation.push("Login")}>
+        <TouchableOpacity onPress={singout}>
           <Text className="text-purple-800 font-bold">Back</Text>
         </TouchableOpacity>
 
